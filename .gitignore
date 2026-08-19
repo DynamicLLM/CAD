@@ -1,3 +1,4 @@
 .tmp/
 docs/rendered_*/
 __pycache__/
+examples/**/*.step
