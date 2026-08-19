@@ -2,6 +2,12 @@
 
 This workflow is inspired by publicly described NX progressive die processes, rewritten as a simple open CadQuery/CQ-Editor workflow.
 
+## Public NX Workflow Themes
+
+Public Siemens/NX material repeatedly describes progressive die work as an associative workflow from sheet-metal part preparation through strip layout, die base assembly, inserts, validation, and drawings. The public course outlines also separate the process into staged part preparation, blank generation, blank layout, scrap design, strip layout, die base management, standard parts, piercing/forming insert design, finishing details, validation, and drawings.
+
+In this open workflow, treat those as process stages rather than as exact NX commands.
+
 ## 1. Part Preparation
 
 Start from a target part. If the target part is already a STEP file, import it and measure it. If it is a simple geometry, define it directly in CadQuery.
@@ -27,6 +33,12 @@ Typical parameters:
 - pilot hole positions
 - material utilization
 
+Material utilization can be estimated as:
+
+```text
+utilization = parts_per_pitch * part_area / (station_pitch * strip_width)
+```
+
 ## 3. Station Sequence
 
 Define stations in feed order.
@@ -51,6 +63,14 @@ For a concept model:
 - upper punch can be a simplified extrusion of the cut profile
 - lower die can be a block with an opening
 - punch/die clearance can be represented by offset profiles where reliable
+
+For a flat blanking concept:
+
+```text
+upper punch profile ~= target cut profile
+lower die opening ~= target cut profile plus clearance
+raw strip ~= rectangular or nested stock around the target profile
+```
 
 ## 5. Assembly
 
@@ -84,3 +104,14 @@ Advanced checks can include:
 - center of pressure
 - station balancing
 
+## 7. Report
+
+Every generated concept should include a short report with:
+
+- source STEP name
+- assumptions
+- material values used
+- station sequence
+- exported STEP files
+- verification results
+- limitations and next engineering decisions

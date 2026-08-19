@@ -1,0 +1,3 @@
+.tmp/
+docs/rendered_*/
+__pycache__/
